@@ -26,7 +26,7 @@ This repository will document my work with screenshots, short explanations, and 
 | 1 | [Footprinting Using Search Engines](#exercise-1--footprinting-using-search-engines) | Complete |
 | 2 | [Footprinting Using Web Services](#exercise-2--footprinting-using-web-services) | Complete |
 | 3 | [Footprinting through Social Networking Sites](#exercise-3--footprinting-through-social-networking-sites) | Pending |
-| 4 | [Website Footprinting](#exercise-4--website-footprinting) | In progress |
+| 4 | [Website Footprinting](#exercise-4--website-footprinting) | Complete |
 | 5 | [DNS Footprinting](#exercise-5--dns-footprinting) | Pending |
 
 Each exercise will include screenshots and a brief explanation of what I did, what I observed, and what I learned.
@@ -198,7 +198,7 @@ I entered the new query before submitting it; the previous definition results we
 
 ## Exercise 4 – Website Footprinting
 
-**Status:** In progress  
+**Status:** Complete  
 **Focus:** Reviewing webpage source and archived webpages to understand a website's public information and history.
 
 ### Lab Environment
@@ -255,9 +255,25 @@ I scrolled to line 95 in the captured source and found a `<script src="...">` re
 
 **Defense connection:** Reviewing public source helps defenders understand what technical information a website exposes. These observations do not establish a vulnerability, reveal server-side source code, or provide a complete server directory listing.
 
-### Task 2 – Footprint Using archive.org
+### Task 2 – Footprint Using Archive.org
 
-*Pending. Screenshots and findings will be added after I complete this task.*
+**Status:** Complete
+
+I opened the Wayback Machine in Microsoft Edge on ACIWIN11 and searched for `practice-labs.com`. I followed the lab's steps to review an archived version and compare it with the live website. This helped me understand how older website content can remain publicly available after a site changes.
+
+![Wayback Machine with practice-labs.com entered in the search field](screenshots/exercise-04/05-wayback-domain-search.png)
+
+**Lab comparison steps:** Select 2019 in the capture timeline, choose February 27, and open the 19:16:12 snapshot specified in the lab. Then visit `https://practice-labs.com` to compare the archived page with the live site. The lab guide describes a redirect to `www.acilearning.com/itpro`; this is the guide's example, not a verified present-day redirect.
+
+**Screenshot coverage:** The uploaded screenshot documents the domain search entry. The calendar, timestamp selection, archived page, and live-page comparison were illustrated by the lab guide's reference images.
+
+**What I learned:** Calendar circles indicate archived captures, not proof that the website changed on each date. The archive does not preserve every update or guarantee a complete copy of every page. [Internet Archive's Wayback Machine guide](https://help.archive.org/help/using-the-wayback-machine/)
+
+**Skills practiced:** Searching web archives, selecting dated captures, and comparing historical and live web content.
+
+**Defense connection:** Older pages may preserve branding, contact details, or other information that could support impersonation attempts. Reviewing a site's history can help defenders understand what remains publicly accessible.
+
+**Exercise 4 complete:** I practiced inspecting webpage source and using web archives for historical research.
 
 ## Exercise 5 – DNS Footprinting
 
