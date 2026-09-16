@@ -92,11 +92,55 @@ I used `allinurl:` to search for the words google, search, and operators in webp
 
 **Observation:** The results page shortens several URLs, so this screenshot alone does not confirm every term in each full URL.
 
-**Skills practiced:** Targeted searching, domain filtering, URL-based searching, and interpreting search results.
+#### Search for a URL Term with `inurl:`
+
+```text
+inurl:google search operators
+```
+
+I used `inurl:google` to search for URLs containing google, with search and operators as additional search terms. Unlike `allinurl:`, only the word immediately after `inurl:` is restricted to the URL. I scrolled through the results and found pages about Google search operators from several websites.
+
+<details>
+<summary>Screenshot: entering the inurl query before submitting it</summary>
+
+![The inurl query entered while the previous allinurl results remain visible](screenshots/exercise-01/06-inurl-query-entry.png)
+
+</details>
+
+![Scrolled results for the inurl search](screenshots/exercise-01/07-inurl-search-results.png)
+
+#### Find PDF Documents with `filetype:`
+
+```text
+Cybersecurity filetype:pdf
+```
+
+I filtered my cybersecurity search to PDF documents. The visible results included the NIST Cybersecurity Framework 2.0 and guidance from other government agencies. I learned how to locate public reports by file format; this query does not require the word cybersecurity to appear in the title.
+
+![Cybersecurity search results with PDF labels, including NIST and other government sources](screenshots/exercise-01/08-pdf-search-results.png)
+
+#### Look Up a Term with `define:`
+
+```text
+define:cybersecurity
+```
+
+I searched for a definition of cybersecurity using `define:`. The results included CISA's "What is Cybersecurity?" page and a computer security information panel. This helped me connect the term to protecting networks, devices, and data.
+
+<details>
+<summary>Screenshot: entering the definition query before submitting it</summary>
+
+![The define query entered while the address bar still shows the previous PDF search](screenshots/exercise-01/09-define-query-entry.png)
+
+</details>
+
+![Definition search results showing CISA and a computer security information panel](screenshots/exercise-01/10-define-search-results.png)
+
+**Skills practiced:** Targeted searching, domain and URL filtering, finding PDF documents, researching terminology, and interpreting search results.
 
 **Defense connection:** These techniques help identify publicly searchable information about an organization that could be used to make social engineering attempts more convincing.
 
-**References:** [Google's site operator documentation](https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site) and [Google's legacy Search Appliance operator reference](https://www.google.com/support/enterprise/static/gsa/docs/admin/current/gsa_doc_set/xml_reference/request_format.html) (allinurl syntax).
+**References:** [Google's site operator documentation](https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site) and [Google's legacy Search Appliance operator reference](https://www.google.com/support/enterprise/static/gsa/docs/admin/current/gsa_doc_set/xml_reference/request_format.html) (inurl and allinurl syntax), plus [Google's file type documentation](https://developers.google.com/search/docs/crawling-indexing/indexable-file-types).
 
 *Exercise 1 remains in progress. Additional search steps will be documented as I complete them.*
 
