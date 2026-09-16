@@ -25,7 +25,7 @@ This repository will document my work with screenshots, short explanations, and 
 | --- | --- | --- |
 | 1 | [Footprinting Using Search Engines](#exercise-1--footprinting-using-search-engines) | Complete |
 | 2 | [Footprinting Using Web Services](#exercise-2--footprinting-using-web-services) | Complete |
-| 3 | [Footprinting through Social Networking Sites](#exercise-3--footprinting-through-social-networking-sites) | Pending |
+| 3 | [Footprinting through Social Networking Sites](#exercise-3--footprinting-through-social-networking-sites) | Complete |
 | 4 | [Website Footprinting](#exercise-4--website-footprinting) | Complete |
 | 5 | [DNS Footprinting](#exercise-5--dns-footprinting) | Pending |
 
@@ -192,9 +192,67 @@ I entered the new query before submitting it; the previous definition results we
 
 ## Exercise 3 – Footprinting through Social Networking Sites
 
-**Focus:** Exploring how information shared on social networking sites can contribute to reconnaissance.
+**Status:** Complete  
+**Focus:** Researching public company records using OpenCorporates. The heading follows the course lab; this task uses a corporate information database.
 
-*Screenshots and findings will be added as I complete this exercise.*
+### Lab Environment
+
+| Device | Operating System | Role |
+| --- | --- | --- |
+| ACIDC01 | Windows Server 2022 | Domain controller |
+| ACIKALI | Kali Purple 2023.1 | Stand-alone Linux workstation used for this task |
+
+### Task 1 – Footprint Using OpenCorporates
+
+I used Firefox on ACIKALI to search OpenCorporates for microsoft. I narrowed the results to Washington (US) and selected MICROSOFT CORPORATION. This helped me practice finding a specific company record and interpreting publicly available business information.
+
+#### Lab Reference Screenshots
+
+These six screenshots come from the Infosec Learning lab guide and are embedded from its original image links.
+
+**1. Open Firefox on ACIKALI.**
+
+![Lab reference: opening Firefox from the Kali Purple desktop](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s1_1.png)
+
+**2. Enter `opencorporates.com` in the address bar.**
+
+![Lab reference: entering the OpenCorporates website address](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s2_2.png)
+
+**3. Search for `microsoft` using the Companies option.**
+
+![Lab reference: Microsoft company search on OpenCorporates](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s3_2.png)
+
+**4. Filter the results by Washington (US).** This narrows the list by registration jurisdiction.
+
+![Lab reference: Washington jurisdiction filter in the search results](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s4_1.png)
+
+**5. Select MICROSOFT CORPORATION.** Checking the jurisdiction and company name helps distinguish it from similarly named records.
+
+![Lab reference: Microsoft Corporation in the Washington search results](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s5_1.png)
+
+**6. Review the company record.**
+
+![Lab reference: Microsoft Corporation record with registration details and address](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s6_1.png)
+
+**Information visible in the lab reference:**
+
+| Field | Value shown |
+| --- | --- |
+| Company name | MICROSOFT CORPORATION |
+| Company number | 600413485 |
+| Status | Active |
+| Company type | WA PROFIT CORPORATION |
+| Jurisdiction | Washington (US) |
+| Registered address | 1 Microsoft Way, Redmond, WA 98052-8300, United States |
+
+These values describe the supplied screenshot, not a current verification of the company record. The incorporation date and officer details require login in the reference image and were not visible.
+
+**What I learned:** Filtering by jurisdiction makes a broad company search more precise. Public records can reveal registration details and addresses, but a similar company name alone does not establish a relationship.
+
+**Skills practiced:** Public-source research (OSINT), company searches, jurisdiction filtering, and interpreting corporate records.
+
+**Defense connection:** Public business information can help verify an organization's identity, but it can also make impersonation attempts sound convincing. Knowing a company's address or registration details is not proof that a message is legitimate.
+
 
 ## Exercise 4 – Website Footprinting
 
