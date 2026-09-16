@@ -52,7 +52,53 @@ I connected to the ACIWIN11 virtual workstation to begin the exercise. The scree
 
 ![ACIWIN11 virtual workstation desktop before beginning search engine reconnaissance](screenshots/exercise-01/01-windows11-lab-setup.png)
 
-*Search queries, results, and lessons learned will be added as I complete the next steps.*
+#### Open the Browser
+
+I opened Microsoft Edge on the lab workstation to begin the Google searches.
+
+<details>
+<summary>Screenshot: Microsoft Edge ready for the search tasks</summary>
+
+![Microsoft Edge new tab on the lab workstation](screenshots/exercise-01/02-edge-browser.png)
+
+</details>
+
+#### Restrict Results to a Domain with `site:`
+
+```text
+"google search operators" site:google.com
+```
+
+I searched for the phrase "google search operators" and used `site:google.com` to limit results to Google's domain. The visible results included developers.google.com and support.google.com, showing that the filter also includes subdomains. I learned how to focus a search on a specific organization’s public web presence.
+
+![Google results restricted to google.com and its subdomains](screenshots/exercise-01/03-site-search-results.png)
+
+#### Search for Words in URLs with `allinurl:`
+
+```text
+allinurl:google search operators
+```
+
+I used `allinurl:` to search for the words google, search, and operators in webpage URLs. The results shown included Ahrefs, Google for Developers, and Search Engine Land. This introduced me to filtering by URL terms; the operator does not require an exact phrase or a specific word order.
+
+<details>
+<summary>Screenshot: entering the allinurl query before submitting it</summary>
+
+![The allinurl query entered while the previous site search results remain visible](screenshots/exercise-01/04-allinurl-query-entry.png)
+
+</details>
+
+![Results after submitting the allinurl search](screenshots/exercise-01/05-allinurl-search-results.png)
+
+**Observation:** The results page shortens several URLs, so this screenshot alone does not confirm every term in each full URL.
+
+**Skills practiced:** Targeted searching, domain filtering, URL-based searching, and interpreting search results.
+
+**Defense connection:** These techniques help identify publicly searchable information about an organization that could be used to make social engineering attempts more convincing.
+
+**References:** [Google's site operator documentation](https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site) and [Google's legacy Search Appliance operator reference](https://www.google.com/support/enterprise/static/gsa/docs/admin/current/gsa_doc_set/xml_reference/request_format.html) (allinurl syntax).
+
+*Exercise 1 remains in progress. Additional search steps will be documented as I complete them.*
 
 ## Exercise 2 – Footprinting Using Web Services
 
