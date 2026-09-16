@@ -265,7 +265,29 @@ I opened the Wayback Machine in Microsoft Edge on ACIWIN11 and searched for `pra
 
 **Lab comparison steps:** Select 2019 in the capture timeline, choose February 27, and open the 19:16:12 snapshot specified in the lab. Then visit `https://practice-labs.com` to compare the archived page with the live site. The lab guide describes a redirect to `www.acilearning.com/itpro`; this is the guide's example, not a verified present-day redirect.
 
-**Screenshot coverage:** The uploaded screenshot documents the domain search entry. The calendar, timestamp selection, archived page, and live-page comparison were illustrated by the lab guide's reference images.
+#### Lab Reference Screenshots
+
+The five images below are provided by the Infosec Learning lab guide and illustrate the remaining steps. They are embedded from the original image links.
+
+**1. Review the capture timeline.** The reference image shows 2024 selected and the available capture history.
+
+![Lab reference: Wayback Machine capture timeline for practice-labs.com](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t2_s4.png)
+
+**2. Select February 27, 2019.** The date popup shows two snapshots: 17:46:10 and 19:16:12.
+
+![Lab reference: two snapshots listed for February 27, 2019](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t2_s5.png)
+
+**3. Choose the 19:16:12 timestamp.** This selects the capture used in the lab.
+
+![Lab reference: selecting the 19:16:12 capture](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t2_s6.png)
+
+**4. Inspect the archived page.** The February 27, 2019 capture displays the Practice Labs branding and welcome page.
+
+![Lab reference: archived Practice Labs welcome page from February 27, 2019](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t2_s7.png)
+
+**5. Enter the live website address.** The reference image shows `https://practice-labs.com` being entered while the archived page remains underneath. It does not show the loaded live page or the redirect destination.
+
+![Lab reference: entering the live Practice Labs URL for comparison](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t2_s8.png)
 
 **What I learned:** Calendar circles indicate archived captures, not proof that the website changed on each date. The archive does not preserve every update or guarantee a complete copy of every page. [Internet Archive's Wayback Machine guide](https://help.archive.org/help/using-the-wayback-machine/)
 
