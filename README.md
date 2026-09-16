@@ -23,8 +23,8 @@ This repository will document my work with screenshots, short explanations, and 
 
 | Exercise | Topic | Status |
 | --- | --- | --- |
-| 1 | [Footprinting Using Search Engines](#exercise-1--footprinting-using-search-engines) | In progress |
-| 2 | [Footprinting Using Web Services](#exercise-2--footprinting-using-web-services) | Pending |
+| 1 | [Footprinting Using Search Engines](#exercise-1--footprinting-using-search-engines) | Complete |
+| 2 | [Footprinting Using Web Services](#exercise-2--footprinting-using-web-services) | Complete |
 | 3 | [Footprinting through Social Networking Sites](#exercise-3--footprinting-through-social-networking-sites) | Pending |
 | 4 | [Website Footprinting](#exercise-4--website-footprinting) | Pending |
 | 5 | [DNS Footprinting](#exercise-5--dns-footprinting) | Pending |
@@ -142,13 +142,53 @@ I searched for a definition of cybersecurity using `define:`. The results includ
 
 **References:** [Google's site operator documentation](https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site) and [Google's legacy Search Appliance operator reference](https://www.google.com/support/enterprise/static/gsa/docs/admin/current/gsa_doc_set/xml_reference/request_format.html) (inurl and allinurl syntax), plus [Google's file type documentation](https://developers.google.com/search/docs/crawling-indexing/indexable-file-types).
 
-*Exercise 1 remains in progress. Additional search steps will be documented as I complete them.*
+**Exercise 1 complete.** I practiced narrowing searches by domain, URL terms, and file type, and used a definition query to research terminology.
 
 ## Exercise 2 – Footprinting Using Web Services
 
-**Focus:** Using web services, including OpenCorporates, to research publicly available organizational information.
+**Status:** Complete  
+**Focus:** Using Google as a web service to identify publicly indexed subdomains.
 
-*Screenshots and findings will be added as I complete this exercise.*
+### Task 1 – Use Web Services for Footprinting
+
+I continued in Microsoft Edge on ACIWIN11, using the same lab environment as Exercise 1: the Windows 11 Pro workstation and ACIDC01 Windows Server 2022 domain controller.
+
+```text
+site:google.com -inurl:www
+```
+
+I combined `site:google.com` with `-inurl:www` to search Google's domain while excluding URLs containing the term www. The visible results included assistant.google.com, cloud.google.com, and play.google.com. I learned how combining search operators can reveal different parts of an organization's public web presence.
+
+<details>
+<summary>Setup screenshots: browser starting point and query entry</summary>
+
+The browser initially showed the definition search from Exercise 1.
+
+![Previous cybersecurity definition results before starting Exercise 2](screenshots/exercise-02/01-browser-starting-point.png)
+
+I entered the new query before submitting it; the previous definition results were still visible underneath.
+
+![Subdomain search query entered before submitting it](screenshots/exercise-02/02-subdomain-query-entry.png)
+
+</details>
+
+![Submitted search showing assistant.google.com, cloud.google.com, and play.google.com](screenshots/exercise-02/03-subdomain-search-results.png)
+
+**What I observed:**
+
+| Subdomain visible in the results | Service shown |
+| --- | --- |
+| `assistant.google.com` | Google Assistant |
+| `cloud.google.com` | Google Cloud |
+| `play.google.com` | Google Play |
+
+**Limitation:** This search identifies some publicly indexed subdomains, not every subdomain. The exclusion applies to the term www in URLs, rather than only to a www hostname.
+
+**Skills practiced:** Combining search operators, excluding URL terms, identifying subdomains, and documenting public search results.
+
+**Defense connection:** Reviewing publicly visible subdomains can help defenders identify online services to include in an organization's asset inventory.
+
+**Reference:** [Google's site operator documentation](https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site) explains that site searches are not exhaustive.
 
 ## Exercise 3 – Footprinting through Social Networking Sites
 
