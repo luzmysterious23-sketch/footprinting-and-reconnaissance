@@ -23,7 +23,7 @@ This repository will document my work with screenshots, short explanations, and 
 
 | Exercise | Topic | Status |
 | --- | --- | --- |
-| 1 | [Footprinting Using Search Engines](#exercise-1--footprinting-using-search-engines) | Pending |
+| 1 | [Footprinting Using Search Engines](#exercise-1--footprinting-using-search-engines) | In progress |
 | 2 | [Footprinting Using Web Services](#exercise-2--footprinting-using-web-services) | Pending |
 | 3 | [Footprinting through Social Networking Sites](#exercise-3--footprinting-through-social-networking-sites) | Pending |
 | 4 | [Website Footprinting](#exercise-4--website-footprinting) | Pending |
@@ -35,7 +35,24 @@ Each exercise will include screenshots and a brief explanation of what I did, wh
 
 **Focus:** Using Google advanced search operators to narrow searches and locate publicly available information.
 
-*Screenshots and findings will be added as I complete this exercise.*
+Search engines can reveal office locations, contact details, email addresses, and employee names. This exercise explores how that public information can support reconnaissance and why it can create social engineering risks.
+
+### Lab Environment
+
+| Device | Operating System | Role |
+| --- | --- | --- |
+| ACIDC01 | Windows Server 2022 | Domain controller |
+| ACIWIN11 | Windows 11 Pro | Domain member workstation |
+
+### Task 1 – Footprint Using Google Advanced Search Operators
+
+#### Lab Setup
+
+I connected to the ACIWIN11 virtual workstation to begin the exercise. The screenshot shows the Windows 11 desktop, ready for the browser-based search tasks.
+
+![ACIWIN11 virtual workstation desktop before beginning search engine reconnaissance](screenshots/exercise-01/01-windows11-lab-setup.png)
+
+*Search queries, results, and lessons learned will be added as I complete the next steps.*
 
 ## Exercise 2 – Footprinting Using Web Services
 
