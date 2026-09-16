@@ -26,7 +26,7 @@ This repository will document my work with screenshots, short explanations, and 
 | 1 | [Footprinting Using Search Engines](#exercise-1--footprinting-using-search-engines) | Complete |
 | 2 | [Footprinting Using Web Services](#exercise-2--footprinting-using-web-services) | Complete |
 | 3 | [Footprinting through Social Networking Sites](#exercise-3--footprinting-through-social-networking-sites) | Pending |
-| 4 | [Website Footprinting](#exercise-4--website-footprinting) | Pending |
+| 4 | [Website Footprinting](#exercise-4--website-footprinting) | In progress |
 | 5 | [DNS Footprinting](#exercise-5--dns-footprinting) | Pending |
 
 Each exercise will include screenshots and a brief explanation of what I did, what I observed, and what I learned.
@@ -198,9 +198,66 @@ I entered the new query before submitting it; the previous definition results we
 
 ## Exercise 4 – Website Footprinting
 
-**Focus:** Reviewing website source code and archived webpages using archive.org to understand a website's public information and history.
+**Status:** In progress  
+**Focus:** Reviewing webpage source and archived webpages to understand a website's public information and history.
 
-*Screenshots and findings will be added as I complete this exercise.*
+### Lab Environment
+
+| Device | Operating System | Role |
+| --- | --- | --- |
+| ACIDC01 | Windows Server 2022 | Domain controller |
+| ACIWIN11 | Windows 11 Pro | Domain member workstation |
+| ACIKALI | Kali Purple 2023.1 | Stand-alone Linux workstation used for this task |
+
+### Task 1 – Footprint Using Source Code
+
+**Status:** Complete
+
+#### Open the Lab Website
+
+I used Firefox on ACIKALI to open the lab website. It displayed the Infosec Learning login page.
+
+```text
+https://lab.infoseclearning.com
+```
+
+<details>
+<summary>Screenshot: entering the lab website address</summary>
+
+![Lab website address entered in Firefox before navigating away from the previous page](screenshots/exercise-04/01-enter-lab-url.png)
+
+</details>
+
+#### View Page Source
+
+I right-clicked the login page and selected **View Page Source**. This let me inspect the HTML delivered to the browser and identify references to the site's resources.
+
+![Firefox context menu with View Page Source selected](screenshots/exercise-04/02-view-page-source.png)
+
+![HTML source showing generator metadata, stylesheets, and theme paths](screenshots/exercise-04/03-html-source.png)
+
+#### Identify JavaScript References
+
+I scrolled to line 95 in the captured source and found a `<script src="...">` reference to a JavaScript file. The source also showed resource paths and generator metadata. I learned how visible HTML can provide clues about a website's technologies and file organization.
+
+![Highlighted script source reference near line 95](screenshots/exercise-04/04-javascript-references.png)
+
+**What I observed:**
+
+| Visible source detail | What it indicates |
+| --- | --- |
+| `<script src="...">` references to `.js` files | The page loads JavaScript resources. |
+| `/sites/default/files/js/` and `/sites/default/files/css/` | Public URL paths used for JavaScript and stylesheets. |
+| `/themes/isl_theme/` | A theme resource path referenced by the page. |
+| Generator metadata naming `Drupal 10` and `Commerce 2` | The page advertises these technologies; this is a source-level clue, not independent version verification. |
+
+**Skills practiced:** Inspecting HTML source, recognizing script and stylesheet references, identifying technology clues, and documenting visible resource paths.
+
+**Defense connection:** Reviewing public source helps defenders understand what technical information a website exposes. These observations do not establish a vulnerability, reveal server-side source code, or provide a complete server directory listing.
+
+### Task 2 – Footprint Using archive.org
+
+*Pending. Screenshots and findings will be added after I complete this task.*
 
 ## Exercise 5 – DNS Footprinting
 
