@@ -3,13 +3,13 @@
 Hands-on cybersecurity lab documenting reconnaissance techniques using search engines, web services, social networks, website analysis, and DNS tools.
 
 **Course:** Ethical Hacking & Network Defense  
-**Status:** In progress
+**Status:** Complete
 
 ## Overview
 
-In this lab, I am exploring how publicly available information can be used to learn about an organization and its online presence. My goal is to understand what these techniques reveal and how that information can help defenders recognize potential security risks.
+In this lab, I explored how publicly available information can be used to learn about an organization and its online presence. My goal was to understand what these techniques reveal and how that information can help defenders recognize potential security risks.
 
-This repository will document my work with screenshots, short explanations, and lessons learned. Activities are limited to the targets and tasks authorized for this course lab.
+This repository documents my work with screenshots, short explanations, and lessons learned. Activities are limited to the targets and tasks authorized for this course lab.
 
 ## Learning Goals
 
@@ -27,9 +27,9 @@ This repository will document my work with screenshots, short explanations, and 
 | 2 | [Footprinting Using Web Services](#exercise-2--footprinting-using-web-services) | Complete |
 | 3 | [Footprinting through Social Networking Sites](#exercise-3--footprinting-through-social-networking-sites) | Complete |
 | 4 | [Website Footprinting](#exercise-4--website-footprinting) | Complete |
-| 5 | [DNS Footprinting](#exercise-5--dns-footprinting) | Pending |
+| 5 | [DNS Footprinting](#exercise-5--dns-footprinting) | Complete |
 
-Each exercise will include screenshots and a brief explanation of what I did, what I observed, and what I learned.
+Each exercise includes screenshots and a brief explanation of the tasks, observations, and lessons learned. Images linked from the course guide are labeled as lab references.
 
 ## Exercise 1 – Footprinting Using Search Engines
 
@@ -357,10 +357,158 @@ The five images below are provided by the Infosec Learning lab guide and illustr
 
 ## Exercise 5 – DNS Footprinting
 
-**Focus:** Using `nslookup` and `Dnsenum` to gather and interpret DNS information about authorized lab targets.
+**Status:** Complete  
+**Focus:** Querying DNS records with `nslookup` and reviewing automated enumeration with `dnsenum`.
 
-*Screenshots and findings will be added as I complete this exercise.*
+### Lab Environment
+
+| Device | Operating System | Role |
+| --- | --- | --- |
+| ACIDC01 | Windows Server 2022 | Domain controller |
+| ACIKALI | Kali Purple 2023.1 | Stand-alone Linux workstation used for both tasks |
+
+The screenshots below are reference images from the Infosec Learning lab guide. Record values describe those captures and may differ from later DNS responses.
+
+### Task 1 – DNS Footprint Using Nslookup
+
+#### Prepare the Terminal and DNS Tools
+
+I opened Terminal Emulator on ACIKALI, refreshed the package list, and installed `dnsutils` for the DNS queries.
+
+```bash
+sudo apt-get update
+sudo apt install dnsutils -y
+```
+
+![Lab reference: opening Terminal Emulator on Kali Purple](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s1_3.png)
+
+![Lab reference: refreshing the package list](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s2a_1.png)
+
+![Lab reference: installing dnsutils and its dependencies](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s2b.png)
+
+#### Resolve the Domain
+
+```bash
+nslookup practice-labs.com
+```
+
+I used a basic lookup to resolve the domain. The reference output identifies `1.1.1.1` as the queried resolver on port 53, followed by a non-authoritative answer containing `199.60.103.192` and `199.60.103.92`.
+
+![Lab reference: basic lookup showing the resolver and returned IP addresses](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s3_4.png)
+
+#### Request A Records
+
+```bash
+nslookup -type=A practice-labs.com
+```
+
+I requested A records specifically to find IPv4 addresses. The reference shows the same two addresses as the basic lookup.
+
+![Lab reference: A-record lookup for practice-labs.com](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s4_3.png)
+
+I used `clear` between queries to keep the terminal readable. The following reference also shows an earlier typo, `practice-lasbs.com`, returning `NXDOMAIN`, followed by a successful query with the correct spelling.
+
+![Lab reference: corrected domain spelling and clear command](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s5_3.png)
+
+#### Inspect the SOA Record
+
+```bash
+nslookup -type=soa practice-labs.com
+```
+
+I queried the Start of Authority record to review zone information. The reference lists `ns-444.awsdns-55.com` as the primary server, along with a serial number and refresh, retry, and expiry values.
+
+![Lab reference: SOA record showing zone administration fields](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s6_2.png)
+
+#### Inspect TTL with Debug Output
+
+```bash
+nslookup -type=A -debug practice-labs.com
+```
+
+I enabled debug output to see more detail about the DNS response. Both A records show a TTL of 123 seconds in this capture, indicating how long those returned records may be cached before they need refreshing.
+
+![Lab reference: debug output showing A records with a TTL of 123 seconds](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s7_1.png)
+
+#### Find Mail Exchange Records
+
+```bash
+nslookup -query=MX practice-labs.com
+```
+
+I requested MX records to identify the domain's inbound mail routing. The reference shows `practicelabs-com02b.mail.protection.outlook.com` with preference 0; lower preference values take priority when multiple MX records exist.
+
+![Lab reference: MX query showing the mail exchange hostname and preference](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s8_1.png)
+
+#### Identify Authoritative Name Servers
+
+```bash
+nslookup -type=ns practice-labs.com
+```
+
+I requested NS records to identify the authoritative name servers. The reference lists four servers: `ns-1153.awsdns-16.org`, `ns-1938.awsdns-50.co.uk`, `ns-444.awsdns-55.com`, and `ns-894.awsdns-47.net`.
+
+![Lab reference: NS query listing four authoritative name servers](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s9_1.png)
+
+#### Try an ANY Query
+
+```bash
+nslookup -query=any practice-labs.com
+```
+
+The reference returns `NOTIMP` (not implemented) instead of a list of records. I learned that ANY is not a reliable way to retrieve every DNS record; querying individual record types gives more useful results. DNS servers may limit ANY responses. [RFC 8482](https://www.rfc-editor.org/rfc/rfc8482.html)
+
+![Lab reference: ANY query returning NOTIMP](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t1_s10_1.png)
+
+### Task 2 – DNS Footprint Using Dnsenum
+
+#### Install the Tool
+
+```bash
+sudo apt install dnsenum -y
+```
+
+I installed `dnsenum` to practice gathering DNS information with an automated tool.
+
+![Lab reference: installing dnsenum and its dependencies](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t2_s1_1.png)
+
+#### Run the Lab Command
+
+```bash
+dnsenum --noreverse practice-labs.com
+```
+
+The lab command uses `--noreverse` to skip reverse lookups. Dnsenum can gather host addresses, name servers, and MX records, and perform additional enumeration such as subdomain queries and zone-transfer attempts. It is an active enumeration tool, so its use stays within the authorized lab scope. [Kali's Dnsenum documentation](https://www.kali.org/tools/dnsenum/)
+
+![Lab reference: dnsenum command entered with the noreverse flag](https://infosec-d8-prod.s3.amazonaws.com/2025-02/dnsenum.png)
+
+#### Review the Output
+
+The supplied output reference shows A and CNAME records for names including `portal.practice-labs.com`, `shop.practice-labs.com`, `web.practice-labs.com`, and `www.practice-labs.com`. I learned to distinguish address records from aliases and to read the tool's output carefully.
+
+![Lab reference: dnsenum output showing host records, network ranges, and a reverse-lookup section](https://infosec-d8-prod.s3.amazonaws.com/2024-07/t2_s3_1.png)
+
+**Reference discrepancy:** This output image includes “Performing reverse lookup on 1280 ip addresses,” which does not match the separate `--noreverse` command image. It illustrates enumeration output but does not verify the result of that exact command. Listed network ranges also do not establish that the organization owns every address in those ranges.
+
+**Skills practiced:** Linux package installation, DNS queries, A/SOA/MX/NS record interpretation, TTL inspection, DNS error interpretation, and enumeration-output review.
+
+**Defense connection:** DNS records help defenders understand publicly visible hosts, mail routing, and name-server infrastructure. They provide useful leads for asset review, but do not by themselves prove a vulnerability or reveal all internal systems.
 
 ## Key Takeaways
 
-*After completing the lab, I will summarize the skills I practiced, the information these techniques revealed, and how these lessons connect to network defense.*
+This lab helped me understand how information from search engines, company records, webpage source, web archives, and DNS can build a picture of an organization's online presence. I practiced narrowing searches, identifying technology clues, and interpreting different DNS record types.
+
+I also learned to separate observations from assumptions. Search results and archives can be incomplete, an ANY query may fail, and a screenshot may not match the command described. Checking these details makes my findings more accurate.
+
+From a defense perspective, I can use these skills to review public information, recognize details that could support impersonation, and document technical findings clearly.
+
+## Skills Demonstrated
+
+- Search operators and public-source research (OSINT).
+- Company-record searches and jurisdiction filtering.
+- HTML source inspection and technology identification.
+- Historical website research using the Wayback Machine.
+- DNS record queries and enumeration-output interpretation.
+- Screenshot documentation and evidence-based reporting.
+
+**Lab complete:** All five exercises are documented.
