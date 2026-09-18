@@ -11,6 +11,14 @@ In this lab, I explored how publicly available information can be used to learn 
 
 This repository documents my work with screenshots, short explanations, and lessons learned. Activities are limited to the targets and tasks authorized for this course lab.
 
+## Portfolio summary
+
+**Focus:** researching public information and explaining its defensive significance.
+
+This write-up connects search operators, website inspection, and DNS observations to asset awareness and social engineering risk. The value is in interpreting what the evidence supports—and recognizing what it does not establish.
+
+**Evidence:** my captured lab screenshots appear alongside explicitly labeled course reference images. Course references illustrate the exercise and are not independent proof of my execution.
+
 ## Learning Goals
 
 - Use Google advanced search operators to find relevant information.
